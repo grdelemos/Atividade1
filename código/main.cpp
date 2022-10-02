@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
 
     Window window;
     window.setWindowSettings(
-        {.width = 600, .height = 620, .title = "Atividade 1"});
+        {.width = 600, .height = 650, .title = "Atividade 1"});
 
     app.run(window);
   } catch (std::exception const &exception) {

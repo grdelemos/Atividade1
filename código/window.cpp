@@ -1,5 +1,5 @@
 #include "window.hpp"
-
+#include <random>
 void Window::onCreate() {
 
   auto const filename{abcg::Application::getAssetsPath() +
@@ -122,100 +122,80 @@ void Window::onPaintUI() {
             // Button text is ch followed by an ID in the format ##ij
             auto buttonText{fmt::format("{}##{}{}", ch, i, j)};
             if (ImGui::Button(buttonText.c_str(), ImVec2(-1, buttonHeight))) {
-              if (i == 0) {
-                if (j == 0 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play5) {
-                    m_board.at(offset) = '5';
-                    m_gameState = GameState::Play1;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
-                }
 
-                if (j == 1 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play3) {
-                    m_board.at(offset) = '3';
-                    m_gameState = GameState::Play9;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+              switch (nums.at(offset)) {
+              case '1':
+                if (ch == ' ' && m_gameState == GameState::Play1) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play2;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-
-                if (j == 2 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play1) {
-                    m_board.at(offset) = '1';
-                    m_gameState = GameState::Play8;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '2':
+                if (ch == ' ' && m_gameState == GameState::Play2) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play3;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-              }
-
-              if (i == 1) {
-                if (j == 0 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play8) {
-                    m_board.at(offset) = '8';
-                    m_gameState = GameState::Play6;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '3':
+                if (ch == ' ' && m_gameState == GameState::Play3) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play4;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-
-                if (j == 1 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play6) {
-                    m_board.at(offset) = '6';
-                    m_gameState = GameState::Win;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '4':
+                if (ch == ' ' && m_gameState == GameState::Play4) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play5;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-
-                if (j == 2 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play2) {
-                    m_board.at(offset) = '2';
-                    m_gameState = GameState::Play5;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '5':
+                if (ch == ' ' && m_gameState == GameState::Play5) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play6;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-              }
-
-              if (i == 2) {
-                if (j == 0 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play7) {
-                    m_board.at(offset) = '7';
-                    m_gameState = GameState::Play4;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '6':
+                if (ch == ' ' && m_gameState == GameState::Play6) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play7;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-
-                if (j == 1 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play9) {
-                    m_board.at(offset) = '9';
-                    m_gameState = GameState::Play2;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '7':
+                if (ch == ' ' && m_gameState == GameState::Play7) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play8;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
-
-                if (j == 2 && ch == ' ' && m_gameState != GameState::Win &&
-                    m_gameState != GameState::Lose) {
-                  if (m_gameState == GameState::Play4) {
-                    m_board.at(offset) = '4';
-                    m_gameState = GameState::Play3;
-                  } else {
-                    m_gameState = GameState::Lose;
-                  }
+                break;
+              case '8':
+                if (ch == ' ' && m_gameState == GameState::Play8) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Play9;
+                } else {
+                  m_gameState = GameState::Lose;
                 }
+                break;
+              case '9':
+                if (ch == ' ' && m_gameState == GameState::Play9) {
+                  m_board.at(offset) = nums.at(offset);
+                  m_gameState = GameState::Win;
+                } else {
+                  m_gameState = GameState::Lose;
+                }
+                break;
               }
             }
           }
@@ -251,22 +231,16 @@ void Window::onPaintUI() {
 
 void Window::startGame() {
   m_board.fill('\0');
-  m_gameState = GameState::Play7;
+  m_gameState = GameState::Play1;
 }
 
 void Window::restartGame() {
-  m_board.at(0) = '5';
-  m_board.at(1) = '3';
-  m_board.at(2) = '1';
-  m_board.at(3) = '8';
-  m_board.at(4) = '6';
-  m_board.at(5) = '2';
-  m_board.at(6) = '7';
-  m_board.at(7) = '9';
-  m_board.at(8) = '4';
+  auto g = rand();
+  std::shuffle(nums.begin(), nums.end(), std::default_random_engine(g));
+  for (auto m : iter::range(9)) {
+    m_board.at(m) = nums.at(m);
+  }
+
   texto = "COMEÇAR";
   m_gameState = GameState::Wait;
-
-  // m_board.fill('\0');
-  // m_gameState = GameState::Play1;
 }

@@ -30,8 +30,8 @@ private:
   };
   GameState m_gameState;
 
-  std::array<char, m_N * m_N> m_board{}; // '\0', 'X' or 'O'
-
+  std::array<char, m_N * m_N> m_board{};
+  std::array<char, m_N * m_N> nums{'1', '2', '3', '4', '5', '6', '7', '8', '9'};
   ImFont *m_font{};
 
   void restartGame();
