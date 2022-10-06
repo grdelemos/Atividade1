@@ -119,7 +119,31 @@ void Window::onPaintUI() {
               ch = ' ';
             }
 
-            // Button text is ch followed by an ID in the format ##ij
+            // Se o botão estiver correto, fica verde, se não fica vermelho
+            if (correct.at(offset) == 1) {
+
+              ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0, 0.5f, 0, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonHovered,
+                                    ImVec4{0, 0.4f, 0, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonActive,
+                                    ImVec4{0, 0.5f, 0, 1.0f});
+
+            } else if (correct.at(offset) == -1) {
+
+              ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0.5f, 0, 0, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonHovered,
+                                    ImVec4{0.4f, 0, 0, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonActive,
+                                    ImVec4{0.5f, 0, 0, 1.0f});
+            } else {
+              ImGui::PushStyleColor(ImGuiCol_Button,
+                                    ImVec4{0.5f, 0.5f, 0.5f, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonHovered,
+                                    ImVec4{0.4f, 0.4f, 0.4f, 1.0f});
+              ImGui::PushStyleColor(ImGuiCol_ButtonActive,
+                                    ImVec4{0.5f, 0.5f, 0.5f, 1.0f});
+            }
+
             auto buttonText{fmt::format("{}##{}{}", ch, i, j)};
             if (ImGui::Button(buttonText.c_str(), ImVec2(-1, buttonHeight))) {
 
@@ -127,73 +151,119 @@ void Window::onPaintUI() {
               case '1':
                 if (ch == ' ' && m_gameState == GameState::Play1) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play2;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '2':
                 if (ch == ' ' && m_gameState == GameState::Play2) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play3;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '3':
                 if (ch == ' ' && m_gameState == GameState::Play3) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play4;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '4':
                 if (ch == ' ' && m_gameState == GameState::Play4) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play5;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '5':
                 if (ch == ' ' && m_gameState == GameState::Play5) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play6;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '6':
                 if (ch == ' ' && m_gameState == GameState::Play6) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play7;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '7':
                 if (ch == ' ' && m_gameState == GameState::Play7) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play8;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '8':
                 if (ch == ' ' && m_gameState == GameState::Play8) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Play9;
-                } else {
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               case '9':
                 if (ch == ' ' && m_gameState == GameState::Play9) {
                   m_board.at(offset) = nums.at(offset);
+                  correct.at(offset) = 1;
                   m_gameState = GameState::Win;
-                } else {
+                  texto = "Parabéns!";
+                } else if (m_gameState != GameState::Win &&
+                           m_gameState != GameState::Lose &&
+                           m_gameState != GameState::Wait) {
                   m_gameState = GameState::Lose;
+                  correct.at(offset) = -1;
+                  texto = "Não foi dessa vez";
                 }
                 break;
               }
@@ -211,20 +281,28 @@ void Window::onPaintUI() {
     {
 
       auto buttonStart{fmt::format("{}", texto)};
+      ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0, 0.5f, 0, 1.0f});
+      ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0, 0.5f, 0, 1.0f});
+      ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0, 0.4f, 0, 1.0f});
+
       if (ImGui::Button(buttonStart.c_str(), ImVec2(-1, 50))) {
         if (m_gameState == GameState::Wait) {
           texto = "Jogando...";
           startGame();
         }
       }
+      ImGui::PopStyleColor(3);
     }
 
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0, 0, 0.5f, 1.0f});
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0, 0, 0.5f, 1.0f});
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0, 0, 0.4f, 1.0f});
     {
       if (ImGui::Button("Reiniciar", ImVec2(-1, 50))) {
         restartGame();
       }
     }
-
+    ImGui::PopStyleColor(3);
     ImGui::End();
   }
 }
@@ -235,6 +313,7 @@ void Window::startGame() {
 }
 
 void Window::restartGame() {
+  correct.fill(0);
   auto g = rand();
   std::shuffle(nums.begin(), nums.end(), std::default_random_engine(g));
   for (auto m : iter::range(9)) {
