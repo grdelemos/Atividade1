@@ -17,6 +17,8 @@ Os botões da grade são gerados por dois laços "for" e para cada botão é ver
 Caso o botão seja clicado e o estado seja o que espera o número 1 o jogo vai para o estado "Play2", caso contrário o jogo vai para o estado "Lose". Isso é repetido para os números de 1 a 9. Caso o jogador acerte até o número 9, o jogo vai para o estado "Win".
 
 As cores do tabuleiro são controladas pelo vetor correct. Se ele tiver o valor 0, o botão é cinza, se tiver o valor 1, ele fica verde e se tiver o valor -1 ele fica vermelho, como mostra o código:
+    
+    
     if (correct.at(offset) == 1) {
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0, 0.5f, 0, 1.0f});
@@ -42,6 +44,8 @@ As cores do tabuleiro são controladas pelo vetor correct. Se ele tiver o valor 
                 }
 
 Cada um dos botões da grade é criado dentro de dois laços for, um representando as linhas e o outro as colunas. Abaixo está o código do caso do texto do botão clicado ser '1':
+    
+    
     switch (nums.at(offset)) {
     case '1':
                     if (ch == ' ' && m_gameState == GameState::Play1) {
@@ -59,7 +63,7 @@ Cada um dos botões da grade é criado dentro de dois laços for, um representan
 
 A variável offset é usada como índice para as posições dos botões, das respostas e também para indicar a cor que deve ser usada. O vetor nums contém as respostas, logo se o jogo estiver esperando o número 1 e o vetor nums tiver esse valor no mesmo índice do botão, ele está correto. Então o vetor m_board recebe o valor de nums, para que o número apareça no tabuleiro, e o vetor correct recebe o valor 1 naquela posição, para que o botão fique verde. Caso essas condições não sejam cumpridas, o jogo vai para o estado de Lose, o vetor correct recebe o valor -1 para que fique vermelho, e o texto do botão abaixo fica "Não foi dessa vez".
 
-A cada reinício a função restartGame mostra as posições dos números e coloca o jogo no estado "Wait", para que o usuário possa memorizá-los.
+A cada reinício a função restartGame é chamada:
 
     void Window::restartGame() {
     correct.fill(0);
@@ -74,4 +78,4 @@ A cada reinício a função restartGame mostra as posições dos números e colo
     }
 
 
-O vetor correct é preenchido com o valor 0, A função shuffle é usada para reordenar as posições dos números do vetor nums, que são atribuídas ao vetor do tabuleiro, chamado m_board.
+O vetor correct é preenchido com o valor 0, A função shuffle é usada para reordenar as posições dos números do vetor nums, que são atribuídas ao vetor do tabuleiro, chamado m_board,  e o jogo é colocado no estado Wait, para que o usuário possa vê-los e memorizar as posições.
